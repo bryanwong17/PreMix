@@ -135,7 +135,7 @@ outputs/
 ## MIL Aggregator Initialization: Barlow Twins Slide Mixing
 
 <p align="center">
-  <img src="figures/premix_barlow_twins_slide_mixing_pretraining.png" alt="Setting Image" width="1000">
+  <img src="figures/premix_barlow_twins_slide_mixing_pre-training.png" alt="Setting Image" width="1000">
 </p>
 
 **1. Prepapre a csv file inside `data/pretrain/` (refer to `data/pretrain/camelyon16_cptac_ucec.csv`)**
@@ -179,7 +179,7 @@ outputs/
 ```
 </details>
 
-## Fine-tuning the MIL Aggregator with Slide Feature Mixing
+## MIL Aggregator Fine-tuning: Mixup and Manifold Mixup
 
 <p align="center">
   <img src="figures/premix_mil_aggregator_architecture.png" alt="Setting Image" width="1000">
@@ -204,7 +204,7 @@ Refer to `config/training/global.yaml` for inspiration <br>
 
 Note that the `<model_name>` in the config file should be the full name `<model_name>_<epoch>` <br>
 
-Make sure to include the following to integrate slide feature mixing during fine-tuning, and uncomment if they are not needed
+Make sure to include the following to integrate slide mixing strategies during fine-tuning and uncomment if they are not needed
 ```
 mixing:
     mixup: True
@@ -216,7 +216,7 @@ mixing:
 ...
 ```
 
-**3. Fine-tuning MIL aggregator with slide feature mixing**
+**3. Fine-tuning MIL aggregator with mixup and manifold mixup**
 
 Run the following command to initiate the fine-tuning process:
 
