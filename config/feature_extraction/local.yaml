@@ -1,0 +1,35 @@
+data_dir: 'D:/bryan/WSI_dataset'
+dataset_name: 'camelyon16'
+
+slide_list: '${data_dir}/${dataset_name}/slides_list.txt'
+region_dir: '${data_dir}/${dataset_name}/hs2p_40x_4096/debug/patches'
+
+output_dir: 'outputs'
+experiment_name: 'hipt'
+
+resume: False
+
+region_size: 4096
+patch_size: 256
+
+format: 'jpg'
+level: 'local'
+
+pretrain_256: 'checkpoints/vit256_small_dino.pth'
+freeze_256: True
+
+pretrain_4096: 'checkpoints/vit4k_xs_dino.pth'
+freeze_4096: False
+
+save_region_features: False # modify
+is_quarter_data: False # modify
+last_output_layer: 1 # get the last X output layers -> X x 192 features
+stain_norm_macenko: False # stain normalization
+
+wandb:
+  enable: False
+  project: 'PreMix'
+  username: 'bryanwong9095'
+  exp_name: 'local_feature_extraction'
+  dir: '/home/user'
+  to_log: ['loss', 'auc', 'kappa', 'roc_auc_curve']

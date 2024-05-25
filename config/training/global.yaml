@@ -1,0 +1,80 @@
+log_dir: 'log'
+data_dir: 'data'
+output_dir: 'outputs'
+script_dir: 'scripts'
+dataset_name: 'camelyon16'
+
+seed: 0
+level: 'global'
+
+model_name: slide_aug_barlow_twins_slide_mixing_camelyon16_cptac_ucec_700
+
+nepochs: 50
+batch_size: 4
+num_classes: 2
+label_name: 'label'
+label_mapping: 
+weighted: False
+gradient_clipping: 32
+
+AL:
+  number_of_generations: 5 
+  initial_pool: 20
+  WSI_budget: 20
+
+strategies: 
+  - RandomSampling
+  - EntropySampling
+  - BadgeSampling
+  - Coreset
+  - KMeansSampling
+  - CDALSampling
+
+tuning:
+  use: True
+  tune_every: 1
+
+loss: 'ce'
+
+model:
+  embed_dim_region: 192
+  dropout: 0.25
+
+  slide_pos_embed:
+    use: True
+    learned: False 
+    type: 1d
+    max_seq_len: 5000
+    max_nslide:
+    tile_size:
+  
+  pretrained: False
+  
+  ##### uncomment these if mixing approaches are not used #####
+  
+  mixing:
+    mixup: True
+    manifold_mixup: True
+    manifold_mixup_transformer: True
+    mixup_alpha: 1
+    mixup_alpha_per_sample: False
+    mixup_type: random # [random, cosine_sim, class_aware]
+
+  ##### uncomment these if mixing approaches are not used #####
+
+optim:
+  name: 'adam'
+  lr: 2e-4
+  wd: 1e-5
+  lr_scheduler:
+    name: 'step'
+    step_size: 50
+    gamma: 0.5
+
+wandb:
+  enable: False
+  project: 'PreMix'
+  username: 'bryanwong9095'
+  exp_name: 'global_training'
+  dir: '/home/user'
+  to_log: ['loss', 'auc', 'kappa', 'roc_auc_curve']

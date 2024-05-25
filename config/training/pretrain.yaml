@@ -1,0 +1,57 @@
+log_dir: 'logs'
+data_dir: 'data'
+output_dir: 'outputs'
+experiment_name: 'hipt'
+script_dir: 'script'
+dataset_name: 'pretrain'
+
+seed: 0
+level: 'global'
+
+model_name: slide_aug_barlow_twins_slide_mixing
+
+nepochs: 700
+save_every: 50
+batch_size: 32
+augmentation: slide_aug # [slide_aug, random_qtr]
+csv_name: camelyon16_cptac_ucec
+
+model:
+  embed_dim_region: 192
+  dropout: 0.25
+
+  slide_pos_embed:
+    use: True
+    learned: False 
+    type: 1d
+    max_seq_len: 5000
+    max_nslide:
+    tile_size:
+
+  pretrained: True
+
+BarlowTwins:
+  lambd: 0.0051
+  optimizer:
+    learning_rate_weights: 0.2
+    learning_rate_biases: 0.0048
+    weight_decay: 1.0e-6
+  loss:
+    alpha: 1
+    beta: 0.5
+    gamma: 0.5
+
+SimCLR:
+  temperature: 1.0
+  use_cosine_similarity: True
+  optimizer:
+    lr: 0.0002
+    wd: 0.00001
+
+wandb:
+  enable: False
+  project: 'PreMix'
+  username: 'bryanwong9095'
+  exp_name: 'pretraining'
+  dir: '/home/user'
+  to_log: ['loss', 'auc', 'kappa', 'roc_auc_curve']

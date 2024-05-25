@@ -1,0 +1,91 @@
+log_dir: 'log'
+data_dir: 'data'
+output_dir: 'output'
+script_dir: 'script'
+dataset_name: 'camelyon16'
+
+seed: 0
+level: 'local'
+
+model_name: regions_mixing_feat_aug_barlow_twins_all_plus_val_bs64_200
+
+nepochs: 50
+batch_size: 4
+num_classes: 2
+label_name: 'label'
+weighted: False
+gradient_clipping: 32
+
+tuning:
+  use: True
+  tune_every: 1
+
+model:
+  pretrain_4096: 'checkpoints/vit256_small_dino.pth'
+  freeze_4096: False
+  freeze_4096_pos_embed: False
+  img_size_4096: 3584
+  patch_size_4096: 256
+  dropout: 0.25
+  embed_dim_region: 192
+
+  slide_pos_embed:
+    use: True
+    learned: False 
+    type: 1d
+    max_seq_len: 5000
+    max_nslide:
+    tile_size:
+  
+  pretrained: False
+  
+  ##### comment these if mixing strategy is not used
+  
+  mixing:
+    mixup: True
+    manifold_mixup: True
+    manifold_mixup_transformer: True
+    mixup_alpha: 1
+    mixup_alpha_per_sample: False
+    mixup_type: random # random, cosine_sim, class_aware
+
+  #### comment these if mixing strategy is not used
+
+optim:
+  name: 'adam'
+  lr: 2e-4
+  wd: 1e-5
+  lr_scheduler:
+    name: 'step'
+    step_size: 20
+    gamma: 0.5
+
+early_stopping:
+  enable: True
+  tracking: 'loss'
+  min_max: 'min'
+  patience: 10
+  min_epoch: 30
+  verbose: True
+  save_all: False
+
+AL:
+  number_of_generations: 5 
+  initial_pool: 20
+  WSI_budget: 20
+
+strategies: 
+  - RandomSampling
+  - EntropySampling
+  - BadgeSampling
+  - Coreset
+  - KMeansSampling
+  - CDALSampling
+
+wandb:
+  enable: False
+  project: 'PreMix'
+  username: 'bryanwong9095'
+  exp_name: 'local_training'
+  dir: '/home/user'
+  to_log: ['loss', 'auc', 'kappa', 'roc_auc_curve']

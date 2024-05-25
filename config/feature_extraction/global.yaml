@@ -1,0 +1,36 @@
+data_dir: 'D:/bryan/WSI_dataset'
+dataset_name: 'pretrain'
+
+slide_list: '${data_dir}/${dataset_name}/slides_list.txt'
+region_dir: '${data_dir}/${dataset_name}/hs2p_20x_4096/debug/patches'
+
+output_dir: 'outputs'
+experiment_name: 'pretrain'
+
+resume: False
+
+region_size: 4096
+patch_size: 256
+overlap: 0
+
+format: 'jpg'
+level: 'global'
+
+pretrain_256: 'checkpoints/vit256_small_dino.pth'
+freeze_256: True
+
+pretrain_4096: 'checkpoints/vit4k_xs_dino.pth'
+freeze_4096: True
+
+save_region_features: True # modify
+is_quarter_data: False # modify
+last_output_layer: 1 # get the last X output layers -> X x 192 features
+stain_norm_macenko: False # stain normalization
+
+wandb:
+  enable: False
+  project: 'PreMix'
+  username: 'bryanwong9095'
+  exp_name: 'global_feature_extraction'
+  dir: '/home/user'
+  to_log: ['loss', 'auc', 'kappa', 'roc_auc_curve']
