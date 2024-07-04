@@ -1,6 +1,6 @@
 <h1 align="center"> PreMix: Boosting Multiple Instance Learning in Digital Histopathology through Pre-training with Intra-Batch Slide Mixing </h1>
 
-**Under Submission Review for Computer Methods and Programs in Biomedicine Journal**
+**Under Submission Review for Computerized Medical Imaging and Graphics Journal**
 
 ## Overview
 - *PreMix* extends the general MIL framework by pre-training the MIL aggregator with an intra-batch slide mixing approach
