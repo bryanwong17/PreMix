@@ -1,11 +1,11 @@
-<h1 align="center"> PreMix: Boosting Multiple Instance Learning in Digital Histopathology through Pre-training with Intra-Batch Slide Mixing </h1>
+<h1 align="center"> PreMix: Addressing Label Scarcity in Whole Slide Image Classification with Pre-trained Multiple Instance Learning Aggregators </h1>
 
-**Under Submission Review for Computerized Medical Imaging and Graphics Journal**
+**Under Submission Review for Biomedical Signal Processing and Control**
 
 ## Overview
-- *PreMix* extends the general MIL framework by pre-training the MIL aggregator with an intra-batch slide mixing approach
-- Specifically, *PreMix* incorporates Barlow Twins Slide Mixing during pre-training, enhancing its ability to handle diverse WSI sizes and maximizing the utility of unlabeled WSIs
-- Integrated with Mixup and Manifold Mixup during fine-tuning, *PreMix* achieves a 4.7\% performance improvement over the baseline MIL framework, the hierarchical image pyramid transformer (HIPT) on the Camelyon16 dataset
+- This study introduces *PreMix*, a framework that leverages the Barlow Twins method with a Slide Mixing approach to pre-train MIL aggregators, addressing the scarce labeled WSIs and the underexplored potential of utilizing unlabeled WSIs in weakly supervised classification.
+- By integrating Mixup and Manifold Mixup during fine-tuning, *PreMix* effectively manages the gigapixel nature and diverse sizes of WSIs, significantly enhancing classification performance under conditions with limited labeled WSI data.
+- Experimental results demonstrate that integrating HIPT into PreMix achieves a 4.7\% mean F1 improvement over the baseline HIPT, showcasing its scalability and effectiveness across varying WSI datasets and labeling scenarios.
 
 <p align="center">
   <img src="figures/common_mil_vs_premix_framework.png" alt="Setting Image" width="1000">
